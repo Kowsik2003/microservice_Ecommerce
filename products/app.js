@@ -10,7 +10,7 @@ dotenv.config();
 
 app.use(express.json());
 
-app.use('/user',routeHandler)
+app.use('/product',routeHandler)
 
 app.use((req,res,next,err) => {
     
