@@ -1,5 +1,6 @@
 const AppError = require('./utils'); 
-const User = require('./user_model');
+const {User} = require('./user_model');
+const stan = require('./nats');
 
 exports.welcome = (req,res,next) => {
     res.status(200).json({

@@ -20,6 +20,6 @@ app.use((req,res,next,err) => {
     })
 })
 
-mongoose.connect(process.env.DATABASE , () => console.log('connected to db'))
+// mongoose.connect(process.env.DATABASE , () => console.log('connected to db'))
 
-app.listen(3000 , () => console.log('listenting at port 3000'));
+app.listen(4000 , () => console.log('listenting at port 3000'));

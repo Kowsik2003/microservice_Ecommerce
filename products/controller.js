@@ -1,5 +1,7 @@
 const AppError = require("./utils");
 const Product = require("./product_model");
+// const nats = require("./nats");
+const stan = require("./nats");
 
 exports.welcome = (req, res, next) => {
   res.status(200).json({
@@ -97,3 +99,8 @@ exports.deleteProduct = async (req, res, next) => {
     next(err);
   }
 };
+
+
+stan.publish('product:updated',JSON.stringify({name : "kowsik"}),() => {
+  console.log("Updated Event")
+})
