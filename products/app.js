@@ -12,19 +12,19 @@ app.use(express.json());
 
 app.use("/product", routeHandler);
 
-app.use((req, res, next, err) => {
-  res.json(err.statusCode).json({
+app.use((err,req, res, next) => {
+
+  if(!err.statusCode)
+{
+	err.statusCode = 500;
+}
+  res.status(err.statusCode).json({
     status: "fail",
     message: err.message,
   });
 });
 
 mongoose
-  .connect("mongodb://products-mongo-srv:27017/products", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-  })
-  .then(() => console.log("connected to db"));
+  .connect("mongodb://products-mongo-srv:27017/products");
 
 app.listen(3000, () => console.log("listenting at port 3000"));

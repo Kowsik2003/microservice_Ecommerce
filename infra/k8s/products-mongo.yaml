@@ -1,6 +1,6 @@
-apiVersion: app/v1
+apiVersion: apps/v1
 kind: Deployment
-metadat:
+metadata:
   name: products-mongo-depl
 spec:
   replicas: 1
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: products-mongo
-          image: mongo
+          image: mongo:4.4.20
 ---
 apiVersion: v1
 kind: Service
