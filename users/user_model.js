@@ -20,7 +20,7 @@ userSchema.methods.checkPassword = async function (currentPassword , userPasswor
     return await bcrypt.compare(currentPassword,userPassword);
 }
 
-const likedProductSchema = mongoose.Schema({
+const cartSchema = mongoose.Schema({
     productId : {
         type : String
     },
@@ -39,8 +39,12 @@ const likedProductSchema = mongoose.Schema({
     photos : [{
         	type : String
         }],
+    userId : {
+        type : mongoose.Schema.ObjectId,
+        ref : 'user'
+    }
 })
 const User = mongoose.model('user',userSchema)
-const Liked = mongoose.model('likedproducts',likedProductSchema)
+const Cart = mongoose.model('cart',cartSchema)
 
-module.exports = {User, Liked};
+module.exports = {User, Cart};
