@@ -6,11 +6,14 @@ const stan = nats.connect("ticketing", crypto.randomBytes(4).toString("hex"), {
 });
 
 stan.on("connect", () => {
-  const productUpdate = stan.subscribe('product:updated','user');
+  console.log("connected ");
+  const productUpdate = stan.subscribe("product:updated", "user");
 
-productUpdate.on('message' , (msg) => {
-    console.log(`No : ${msg.getSequence()} Data : ${JSON.parse(msg.getData())}`);
-})
+  productUpdate.on("message", (msg) => {
+    console.log(
+      `No : ${msg.getSequence()} Data : ${JSON.parse(msg.getData())}`
+    );
+  });
 });
 
 module.exports = stan;

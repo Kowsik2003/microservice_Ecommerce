@@ -75,6 +75,10 @@ exports.updateProduct = async (req, res, next) => {
 
     if (!product) throw new AppError("product not found", 404);
 
+    stan.publish("product:updated", JSON.stringify(product), () => {
+      console.log("Updated Event");
+    });
+
     res.status(200).json({
       status: "success",
       data: {
@@ -92,6 +96,10 @@ exports.deleteProduct = async (req, res, next) => {
       _id: req.params.id,
     });
 
+    stan.publish("product:deleted", JSON.stringify(product), () => {
+      console.log("Updated Event");
+    });
+
     res.status(204).json({
       status: "success",
     });
@@ -99,8 +107,3 @@ exports.deleteProduct = async (req, res, next) => {
     next(err);
   }
 };
-
-
-stan.publish('product:updated',JSON.stringify({name : "kowsik"}),() => {
-  console.log("Updated Event")
-})

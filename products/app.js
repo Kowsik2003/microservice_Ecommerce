@@ -19,6 +19,12 @@ app.use((req, res, next, err) => {
   });
 });
 
-// mongoose.connect(process.env.DATABASE , () => console.log('connected to db'))
+mongoose
+  .connect("mongodb://products-mongo-srv:27017/products", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  })
+  .then(() => console.log("connected to db"));
 
 app.listen(3000, () => console.log("listenting at port 3000"));
