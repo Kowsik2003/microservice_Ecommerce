@@ -96,6 +96,9 @@ exports.deleteProduct = async (req, res, next) => {
       _id: req.params.id,
     });
 
+    if(!product)
+      throw new AppError('product not found',404);
+
     stan.publish("product:deleted", JSON.stringify(product), () => {
       console.log("Updated Event");
     });

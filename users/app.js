@@ -12,13 +12,16 @@ app.use(express.json());
 
 app.use("/user", routeHandler);
 
-app.use((req, res, next, err) => {
-  res.json(err.statusCode).json({
+app.use((err,req, res, next) => {
+  if(!err.statusCode)
+    err.statusCode = 500;
+  
+  res.status(err.statusCode).json({
     status: "fail",
     message: err.message,
   });
 });
 
-// mongoose.connect(process.env.DATABASE , () => console.log('connected to db'))
+mongoose.connect('mongodb://users-mongo-srv:27017/users')
 
-app.listen(4000, () => console.log("listenting at port 3000"));
+app.listen(4000, () => console.log("listenting at port 4000"));

@@ -1,30 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: users-mongo-depl
+  name: users-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: users-mongo
+      app: users
   template:
     metadata:
       labels:
-        app: users-mongo
+        app: users
     spec:
       containers:
-        - name: users-mongo
-          image: mongo:4.4.20
+        - name: client
+          image: kowsik2003/users
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: users-mongo-srv
+  name: users-srv
 spec:
   selector:
-    app: users-mongo
+    app: users
   ports:
-    - name: db
+    - name: users
       protocol: TCP
-      port: 27017
-      targetPort: 27017
+      port: 4000
+      targetPort: 4000
+
