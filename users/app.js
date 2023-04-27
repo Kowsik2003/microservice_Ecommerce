@@ -22,6 +22,6 @@ app.use((err,req, res, next) => {
   });
 });
 
-// mongoose.connect(process.env.DATABASE , () => console.log('connected to db'))
+mongoose.connect('mongodb://users-mongo-srv:27017/users')
 
-app.listen(4000, () => console.log("listenting at port 3000"));
+app.listen(4000, () => console.log("listenting at port 4000"));
