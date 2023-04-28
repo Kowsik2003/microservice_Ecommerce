@@ -4,7 +4,7 @@ const ctrl = require('./controller');
 Router.route('/')
     .get(ctrl.welcome)
 
-// Router.post('/signup',ctrl.signup)
+Router.post('/',ctrl.placeOrder)
 // Router.post('/login',ctrl.login)
 
 // Router.patch('/cart',ctrl.addToCart);
