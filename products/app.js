@@ -3,13 +3,16 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const stan = require("./nats");
 const routeHandler = require("./route");
-
+const cors = require("cors")
 const app = express();
 
 dotenv.config();
 
 app.use(express.json());
 
+app.use(cors({
+  origin: "*"
+}))
 app.use("/product", routeHandler);
 
 app.use((err,req, res, next) => {

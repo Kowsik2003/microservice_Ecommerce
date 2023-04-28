@@ -16,3 +16,10 @@ spec:
                 name: products-srv
                 port:
                   number: 3000
+          - path: /user
+            pathType: Prefix
+            backend:
+              service:
+                name: users-srv
+                port:
+                  number: 4000
