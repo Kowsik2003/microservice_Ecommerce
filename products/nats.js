@@ -8,7 +8,8 @@ const stan = nats.connect("ticketing", crypto.randomBytes(4).toString("hex"), {
 
 stan.on("connect", async () => {
   console.log("connected to server");
-  const ordercreated = stan.subscribe('order:created',"product");
+  const options = stan.subscriptionOptions().setManualAckMode(true)
+  const ordercreated = stan.subscribe('order:created',"product",options);
 
   ordercreated.on('message', async(msg) => {
     const data = JSON.parse(msg.getData())
@@ -17,6 +18,9 @@ stan.on("connect", async () => {
   })
 
 });
+
+process.on("SIGINT",()=> stan.close())
+process.on("SIGTERM",()=> stan.close())
 
 module.exports = stan;
 

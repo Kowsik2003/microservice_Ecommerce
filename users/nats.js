@@ -8,8 +8,10 @@ const stan = nats.connect("ticketing", crypto.randomBytes(4).toString("hex"), {
 
 stan.on("connect", async () => {
   console.log("connected ");
-  const productUpdate = stan.subscribe("product:updated", "user");
-  const productDeleted = stan.subscribe("product:deleted","user")
+  const options = stan.subscriptionOptions().setManualAckMode(true)
+
+  const productUpdate = stan.subscribe("product:updated", "users",options);
+  const productDeleted = stan.subscribe("product:deleted","users",options)
 
   productUpdate.on("message",async  (msg) => {
     console.log(
@@ -26,6 +28,8 @@ stan.on("connect", async () => {
       console.log("updated")
     else 
       console.log("no update")
+
+    msg.ack();
   });
 
   productDeleted.on('message',async (msg) => {
@@ -42,7 +46,12 @@ stan.on("connect", async () => {
       console.log("deleted")
     else 
       console.log("no delete")    
+
+    msg.ack();
   })
 });
+
+process.on("SIGINT",()=> stan.close())
+process.on("SIGTERM",()=> stan.close())
 
 module.exports = stan;

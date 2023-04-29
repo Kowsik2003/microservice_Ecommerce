@@ -10,4 +10,7 @@ stan.on("connect", async () => {
   console.log("connected "); 
 });
 
+process.on("SIGINT",()=> stan.close())
+process.on("SIGTERM",()=> stan.close())
+
 module.exports = stan;
