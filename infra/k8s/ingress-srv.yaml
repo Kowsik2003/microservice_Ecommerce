@@ -22,4 +22,11 @@ spec:
               service:
                 name: users-srv
                 port:
-                  number: 4000
+                  number: 4000	 
+          - path: /order
+            pathType: Prefix
+            backend:
+              service:
+                name: orders-srv
+                port:
+                  number: 5000

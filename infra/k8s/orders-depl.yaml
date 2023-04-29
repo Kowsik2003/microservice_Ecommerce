@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: users-depl
+  name: orders-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: users
+      app: orders
   template:
     metadata:
       labels:
-        app: users
+        app: orders
     spec:
       containers:
         - name: client
-          image: kowsik2003/users
+          image: kowsik2003/orders
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: users-srv
+  name: orders-srv
 spec:
   selector:
-    app: users
+    app: orders
   ports:
-    - name: users
+    - name: orders
       protocol: TCP
-      port: 4000
-      targetPort: 4000
+      port: 5000
+      targetPort: 5000
 
