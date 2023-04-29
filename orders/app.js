@@ -27,6 +27,6 @@ app.use((err,req, res, next) => {
   });
 });
 
-mongoose.connect('mongodb://172.16.5.200:27017/users')
+mongoose.connect('mongodb://orders-mongo-srv:27017/orders')
 
 app.listen(5000, () => console.log("listenting at port 5000"));
